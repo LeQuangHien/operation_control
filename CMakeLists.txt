@@ -17,6 +17,17 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(bridge_msgs REQUIRED)
+
+add_executable(setpoint_advertiser src/setpoint_advertiser.cpp)
+ament_target_dependencies(setpoint_advertiser rclcpp bridge_msgs)
+
+install(TARGETS
+        setpoint_advertiser
+        DESTINATION lib/${PROJECT_NAME})
+
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
