@@ -23,18 +23,20 @@ public:
                         qos_profile.depth
                 ),
                 qos_profile);
-        qos.best_effort();
+        //qos.best_effort();
 
         publisher_ = this->create_publisher<bridge_msgs::msg::Setpoint>("Setpoint_PubSubTopic", qos);
         auto timer_callback =
                 [this]() -> void {
                     auto setpoint = bridge_msgs::msg::Setpoint();
                     setpoint.header.stamp = this->now();
-                    setpoint.x = count_++;
+                    count_++;
+                    setpoint.header.frame_id = std::to_string(count_);
+                    setpoint.x = count_;
                     setpoint.y = 0.0;
                     setpoint.z = -3.0;
-                    RCLCPP_INFO(this->get_logger(), "Publishing setpoint %d: time: %llu x: %f y: %f z: %f ",
-                                count_ - 1, setpoint.header.stamp, setpoint.x, setpoint.y, setpoint.z);
+                    RCLCPP_INFO(this->get_logger(), "Publishing setpoint %d: second: %llu nanosecond: %llu x: %f y: %f z: %f ",
+                                count_, setpoint.header.stamp.sec, setpoint.header.stamp.nanosec, setpoint.x, setpoint.y, setpoint.z);
                     this->publisher_->publish(setpoint);
                 };
         timer_ = this->create_wall_timer(100ms, timer_callback);
