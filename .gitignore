@@ -52,3 +52,5 @@ CATKIN_IGNORE
 .catkin_tools
 cmake-build-debug
 .idea
+log/
+install/

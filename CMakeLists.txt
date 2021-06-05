@@ -23,9 +23,12 @@ find_package(bridge_msgs REQUIRED)
 
 add_executable(setpoint_advertiser src/setpoint_advertiser.cpp)
 ament_target_dependencies(setpoint_advertiser rclcpp bridge_msgs)
+add_executable(sensor_bridge_listener src/sensor_bridge_listener.cpp)
+ament_target_dependencies(sensor_bridge_listener rclcpp bridge_msgs)
 
 install(TARGETS
         setpoint_advertiser
+        sensor_bridge_listener
         DESTINATION lib/${PROJECT_NAME})
 
 # uncomment the following section in order to fill in
