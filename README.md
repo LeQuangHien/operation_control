@@ -102,6 +102,9 @@ Two PCs are needed to run this experiment. One for the offboard computer and one
   ```
   ros2 topic echo /statistics_setpoint
   ```
+  Data type in the statistics
+  ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
+
 4. In the GCS
   - Open a new terminal to observe published statistic data for "Sensor":
   ```
