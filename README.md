@@ -5,15 +5,15 @@ This is operation package in Ground Control Station (GCS) which is one of 6 pack
 
 
 ## List of packages
-1. [px4_ros_com](https://github.com/LeQuangHien/px4_ros_com)
-2. [px4_msgs](https://github.com/LeQuangHien/px4_msgs)
-3. [bridge_msgs](https://github.com/LeQuangHien/bridge_msgs)
-4. [operation_control](https://github.com/LeQuangHien/operation_control)
-5. [image_tools](https://github.com/LeQuangHien/image_tools)
-6. [launch_bringup](https://github.com/LeQuangHien/launch_bringup)
+1. [px4_ros_com](https://github.com/LeQuangHien/px4_ros_com): is forked from [PX4-ROS2 bridge](https://github.com/PX4/px4_ros_com) and then add/edit to adapt the experiments.
+2. [px4_msgs](https://github.com/LeQuangHien/px4_msgs): is forked from [ROS2 message definitions of the PX4 Pro ecosystem](https://github.com/PX4/px4_msgs).
+3. [bridge_msgs](https://github.com/LeQuangHien/bridge_msgs): includes bridge messages for communication between the companion computer and the Ground Control Station.
+4. [operation_control](https://github.com/LeQuangHien/operation_control): is the main package for GCS.
+5. [image_tools](https://github.com/LeQuangHien/image_tools): is forked from ROS2 foxy source [code](https://github.com/ros2/ros2/releases/tag/release-foxy-20201211) and then edit to adapt the experiments.
+6. [launch_bringup](https://github.com/LeQuangHien/launch_bringup): includes launch files in order to run required nodes in the companion computer and the Ground Control Station.
 
 ## How to build
-- [Install ROS2 Foxy](https://docs.ros.org/en/foxy/Installation/Ubuntu-Development-Setup.html)
+- [Install ROS2 Foxy](https://docs.ros.org/en/foxy/Installation.html)
 - [Install PX4](https://docs.px4.io/master/en/dev_setup/dev_env_linux_ubuntu.html)
 - [Install Fast DDS](https://docs.px4.io/master/en/dev_setup/fast-dds-installation.html)
 - Building ros2 evaluation working space
@@ -40,7 +40,7 @@ This is operation package in Ground Control Station (GCS) which is one of 6 pack
   4. [Sanity Check the Installation](https://docs.px4.io/master/en/ros/ros2_comm.html#sanity-check-the-installation)
    
 ## How to run
-Two PCs are needed to run this experiment. One for the offboard computer and one for Ground Control Station(GCS). Above section "How to build" should be completed in both PCs. Both PCs should be in the same wireless network.
+Two PCs are needed to run this experiment. One for the companion computer and one for Ground Control Station(GCS). Above section "How to build" should be completed in both PCs. Both PCs should be in the same wireless network.
 
 1. In the offboard computer
   - Open a new terminal in the root of the PX4 Autopilot project, and then start a PX4 Gazebo simulation using:
