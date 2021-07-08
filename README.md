@@ -93,12 +93,12 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   ```
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
   
-4. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 10% packet loss using "tc" in both the companion computer and the GCS
+4. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 1%-5% packet loss using "tc" in both the companion computer and the GCS
   ```
-  sudo tc qdisc add dev wlp2s0 root netem loss 10%  
+  sudo tc qdisc add dev wlp2s0 root netem loss 1%  
   
   # Remember to delete this by using: 
-  sudo tc qdisc delete dev wlp2s0 root netem loss 10%
+  sudo tc qdisc delete dev wlp2s0 root netem loss 1%
   ```
 5. Observe the outputs in the statistic's terminals. Compare the results with and without packet loss, with and without "best_effort" QoS policy.
 
