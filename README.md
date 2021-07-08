@@ -82,8 +82,9 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   ```
   #  Open a new terminal to observe published statistic data for "Setpoint":
   ros2 topic echo /statistics_setpoint
+  
+  # For data type in the statistics, please see the lookup table below
   ```
-  For data type in the statistics, please see the look up table below
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
 
 4. In the GCS
@@ -93,8 +94,9 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   ros2 topic echo /statistics_sensor
   # Open a new terminal to observe published statistic data for "Image":
   ros2 topic echo /statistics_image
+  
+  # For data type in the statistics, please see the lookup table below
   ```
-  For data type in the statistics, please see the look up table below
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
   
 5. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 10% packet loss using "tc" in both the offboard computer and the GCS
