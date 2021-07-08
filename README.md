@@ -42,79 +42,69 @@ This is operation package in Ground Control Station (GCS) which is one of 6 pack
 ## How to run
 Two PCs are needed to run this experiment. One for the companion computer and one for Ground Control Station(GCS). Above section "How to build" should be completed in both PCs. Both PCs should be in the same wireless network.
 
-1. In the offboard computer
-  - Open a new terminal in the root of the PX4 Autopilot project, and then start a PX4 Gazebo simulation using:
+1. In the companion computer
+  
   ```
+  # Open a new terminal in the root of the PX4 Autopilot project, and then start a PX4 Gazebo simulation using:
   make px4_sitl_rtps gazebo
-  ```
-  - On a new terminal, source the ROS 2 workspace and then start the micrortps_agent daemon with UDP as the transport protocol:
-  ```
+  
+  # On a new terminal, source the ROS 2 workspace and then start the micrortps_agent daemon with UDP as the transport protocol:
   source ~/ros2_evaluation/install/setup.bash
   micrortps_agent -t UDP
+  
+  # On the original terminal (System console of PX4 Gazebo) start the micrortps_client daemon with UDP:
+  micrortps_client start -t UDP
+  
+  # Open a new terminal to launch drone nodes including offboard_control node and two nodes publishing images and sensor data (pick one of two below):
+   source ~/ros2_evaluation/install/setup.bash
+   
+  # The failsafe mode of the drone simulator is usually enabled in the beginning, so if you see the drone has not taken off, then Ctrl+C to end and then run the launch file again. Do it untill the drone has taken off. In my case, the drone will take off in the second time
+  
+  # for default QoS polices
+  ros2 launch launch_bringup drone_default_qos.launch.py
+  # Or for best-effort QoS policies
+  ros2 launch launch_bringup drone_best_effort_qos.launch.py
   ```
-  - On the original terminal (System console) start the micrortps_client daemon with UDP:
-  ```
-  pxh> micrortps_client start -t UDP
-  ```
-  - Open a new terminal and start "offboard_control" node using:
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 run px4_ros_com offboard_control  # default QoS policies
-  ```
-  or
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 run px4_ros_com offboard_control --ros-args -p reliability:=best_effort  # best-effort QoS policies
-  ```
-  - Open a new terminal and start publishing images and sensor data using launch file:
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 launch launch_bringup drone_default_qos.launch.py  # default QoS policies
-  ```
-  or
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 launch launch_bringup drone_best_effort_qos.launch.py  # best-effort QoS policies
-  ```
+  
 2. In the GCS
-  - Open a new terminal and start "setpoint_advertiser" node using:
-  ```
+ 
+  ``` 
+  # Open a new terminal and start setpoint_advertiser node and two nodes receiving images and sensor data from drone using launch file (pick one of two below):
   source ~/ros2_evaluation/install/setup.bash
-  ros2 run operation_control setpoint_advertiser # default QoS policies
+  
+  # for default QoS polices
+  ros2 launch launch_bringup gcs_default_qos.launch.py
+  # Or for best-effort QoS policies
+  ros2 launch launch_bringup drone_best_effort_qos.launch.py
   ```
-  or
+3. In the companion computer
+ 
   ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 run operation_control setpoint_advertiser --ros-args -p reliability:=best_effort  # best-effort QoS policies
-  ```
-  - Open a new terminal to receive images and sensor data from drone using launch file:
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 launch launch_bringup gcs_default_qos.launch.py  # default QoS policies
-  ```
-  or
-  ```
-  source ~/ros2_evaluation/install/setup.bash
-  ros2 launch launch_bringup gcs_best_effort_qos.launch.py  # best-effort QoS policies
-  ```
-3. In the offboard computer
-  - Open a new terminal to observe published statistic data for "Setpoint":
-  ```
+  #  Open a new terminal to observe published statistic data for "Setpoint":
   ros2 topic echo /statistics_setpoint
   ```
-  Data type in the statistics
+  For data type in the statistics, please see the look up table below
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
 
 4. In the GCS
-  - Open a new terminal to observe published statistic data for "Sensor":
+  
   ```
+  # Open a new terminal to observe published statistic data for "Sensor":
   ros2 topic echo /statistics_sensor
+  # Open a new terminal to observe published statistic data for "Image":
+  ros2 topic echo /statistics_image
   ```
+  For data type in the statistics, please see the look up table below
+  ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
+  
 5. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 10% packet loss using "tc" in both the offboard computer and the GCS
   ```
-  sudo tc qdisc add dev wlp2s0 root netem loss 10%  # Remember to delete this by using: `sudo tc qdisc delete dev wlp2s0 root netem loss 10%`
+  sudo tc qdisc add dev wlp2s0 root netem loss 10%  
+  
+  # Remember to delete this by using: 
+  sudo tc qdisc delete dev wlp2s0 root netem loss 10%
   ```
-6. Observe the outputs in "offboard_control" terminal and the statistic's terminals. Compare the results with and without packet loss, with and without "best_effort" QoS policy.
+6. Observe the outputs in the statistic's terminals. Compare the results with and without packet loss, with and without "best_effort" QoS policy.
 
 
 ## References
