@@ -1,7 +1,7 @@
 # operation_control
 This is operation package in Ground Control Station (GCS) which is one of 6 packages in the ros2 evaluation workingspace. This experiment aims to evaluate the Quality of Service (QoS) in ROS2.
 
-![QoS_ROS2_2](https://user-images.githubusercontent.com/9337121/121939049-d635f100-cd4c-11eb-8839-25632bb8f8c3.png)
+![QoS_ROS2_2](https://user-images.githubusercontent.com/9337121/124899938-e5712d00-dfe0-11eb-8b0b-c62092bede1c.png)
 
 
 ## List of packages
