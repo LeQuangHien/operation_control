@@ -77,20 +77,12 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   # Or for best-effort QoS policies
   ros2 launch launch_bringup drone_best_effort_qos.launch.py
   ```
-3. In the companion computer
- 
-  ```
-  #  Open a new terminal to observe published statistic data for "Setpoint":
-  ros2 topic echo /statistics_setpoint
-  
-  # For data type in the statistics, please see the lookup table below
-  # Units: milliseconds
-  ```
-  ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
 
-4. In the GCS
+3. In the GCS
   
   ```
+  # Open a new terminal to observe published statistic data for "Setpoint":
+  ros2 topic echo /statistics_setpoint
   # Open a new terminal to observe published statistic data for "Sensor":
   ros2 topic echo /statistics_sensor
   # Open a new terminal to observe published statistic data for "Image":
@@ -101,14 +93,14 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   ```
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
   
-5. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 10% packet loss using "tc" in both the companion computer and the GCS
+4. Run `ifconfig` to get the interface for communicating between devices in the local network, here is "wlp2s0". Then simulate 10% packet loss using "tc" in both the companion computer and the GCS
   ```
   sudo tc qdisc add dev wlp2s0 root netem loss 10%  
   
   # Remember to delete this by using: 
   sudo tc qdisc delete dev wlp2s0 root netem loss 10%
   ```
-6. Observe the outputs in the statistic's terminals. Compare the results with and without packet loss, with and without "best_effort" QoS policy.
+5. Observe the outputs in the statistic's terminals. Compare the results with and without packet loss, with and without "best_effort" QoS policy.
 
 
 ## References
