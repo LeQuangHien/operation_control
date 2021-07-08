@@ -84,6 +84,7 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   ros2 topic echo /statistics_setpoint
   
   # For data type in the statistics, please see the lookup table below
+  # Units: milliseconds
   ```
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
 
@@ -95,7 +96,8 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   # Open a new terminal to observe published statistic data for "Image":
   ros2 topic echo /statistics_image
   
-  # For data type in the statistics, please see the lookup table below
+  # For data type in the statistics, please see the lookup table belowUnits: milliseconds
+  # Units: milliseconds
   ```
   ![data_type](https://user-images.githubusercontent.com/9337121/124759851-691f1100-df30-11eb-9b92-b7f669b6e050.png)
   
