@@ -75,7 +75,7 @@ Two PCs are needed to run this experiment. One for the companion computer and on
   # for default QoS polices
   ros2 launch launch_bringup gcs_default_qos.launch.py
   # Or for best-effort QoS policies
-  ros2 launch launch_bringup drone_best_effort_qos.launch.py
+  ros2 launch launch_bringup gcs_best_effort_qos.launch.py
   ```
 
 3. In the GCS
